@@ -40,7 +40,7 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarContent>
-        <SidebarGroup>
+        <SidebarGroup className="p-4">
           <div className="flex justify-between items-center mb-4">
             <SidebarGroupLabel className="text-lg font-bold text-gray-800">Eric&apos;s Chatbot</SidebarGroupLabel>
             <Tooltip>
