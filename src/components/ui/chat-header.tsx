@@ -1,10 +1,11 @@
 import React from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from '~/components/ui/select'
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
 // type Props = {}
 
 export default function ChatHeader() {
   return (
-    <div className='flex justify-between items-center py-4 w-full bg-white'>
+    <div className='flex justify-between items-center w-full bg-white mb-4'>
         <Select>
             <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a model" />
@@ -19,6 +20,10 @@ export default function ChatHeader() {
                 </SelectGroup>
             </SelectContent>
         </Select>
+        <Avatar>
+          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
     </div>
   )
 }
