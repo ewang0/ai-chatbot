@@ -20,7 +20,8 @@ import { redirect } from "next/navigation";
 export function AppSidebar() {
   const utils = api.useUtils();
   const { data: sessions } = api.session.getAll.useQuery();
-  const { data: latestSession } = api.session.getLatest.useQuery();
+  const sessionsWithMessages = sessions?.filter((session) => session.messages.length > 0);
+  
   const deleteSession = api.session.delete.useMutation({
     onSuccess: () => {
       void utils.session.getAll.invalidate();
@@ -36,7 +37,6 @@ export function AppSidebar() {
     redirect(`/chat`);
   }
 
-  console.log(sessions);
   return (
     <Sidebar>
       <SidebarContent>
@@ -58,7 +58,7 @@ export function AppSidebar() {
           </div>
           <SidebarGroupContent>
             <SidebarMenu>
-              {sessions?.map((session) => (
+              {sessionsWithMessages?.map((session) => (
                 <SidebarMenuItem key={session.id}>
                   <SidebarMenuButton asChild>
                     <div className="flex justify-between items-center">
