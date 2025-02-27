@@ -39,16 +39,12 @@ export async function saveChat({
   }): Promise<void> {
 
     // if the session id does not already exist, create it.
-    const sessionExists = await db.query.session.findFirst({
-        where: eq(session.id, id),
-    });
-
-    if (!sessionExists) {
-        await db.insert(session).values({
+    await db.transaction(async (tx) => {
+        await tx.insert(session).values({
             id,
             createdAt: new Date(),
-        });
-    }
+        }).onConflictDoNothing();
+    });
 
     // Insert each message into the database
     for (const message of messages) {
